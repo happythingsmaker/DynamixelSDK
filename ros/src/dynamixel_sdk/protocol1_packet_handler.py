@@ -368,12 +368,12 @@ class Protocol1PacketHandler(object):
 
     def read2ByteRx(self, port, dxl_id):
         data, result, error = self.readRx(port, dxl_id, 2)
-        data_read = DXL_MAKEWORD(data[0], data[1]) if (result == COMM_SUCCESS) else 0
+        data_read = DXL_MAKEWORD(data[0], data[1]) if (result == COMM_SUCCESS) and len(data) == 2  else 0
         return data_read, result, error
 
     def read2ByteTxRx(self, port, dxl_id, address):
         data, result, error = self.readTxRx(port, dxl_id, address, 2)
-        data_read = DXL_MAKEWORD(data[0], data[1]) if (result == COMM_SUCCESS) else 0
+        data_read = DXL_MAKEWORD(data[0], data[1]) if (result == COMM_SUCCESS) and len(data) == 2  else 0
         return data_read, result, error
 
     def read4ByteTx(self, port, dxl_id, address):
